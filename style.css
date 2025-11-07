@@ -1,0 +1,272 @@
+/* Custom CSS Variables */
+:root {
+    --hijau-tua: #1b5e20; /* Diubah ke hijau yang lebih tua dan kaya */
+    --hijau-muda: #4caf50;
+    --putih: #ffffff;
+    --gold: #d4af37;
+    --abu-abu: #f0f9f0; /* Diubah ke hijau muda untuk latar */
+}
+
+/* --- PERBAIKAN PAKSA UNTUK LAYOUT PENUH --- */
+/* ATURAN INI SANGAT PENTING. Ini secara langsung menghapus padding dari kontainer utama. */
+body main > div.p-4.md\:p-8 {
+    padding: 0 !important;
+}
+
+/* General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--abu-abu); /* Latar belakang halaman menjadi hijau muda */
+}
+
+/* --- PERBAIKAN LAYOUT KONTEN UTAMA --- */
+main > div:first-child { /* Target div di dalam main yang membungkus halaman */
+    padding: 0 !important; /* Hapus padding dengan !important untuk memastikan */
+}
+
+.page {
+    padding: 2rem; /* Tambahkan padding ke setiap halaman agar tidak menempel tepi */
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* Sidebar Styles */
+.sidebar-open {
+    transform: translateX(0) !important;
+}
+
+.nav-link.active {
+    background-color: rgba(76, 175, 80, 0.5); /* Warna aktif menggunakan hijau muda untuk kontras */
+    font-weight: 600;
+}
+
+/* Table Hover Effects */
+tbody tr {
+    transition: background-color 0.2s ease-in-out;
+}
+
+tbody tr:hover {
+    background-color: #e8f5e9; /* Warna hover yang sedikit lebih hijau */
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--hijau-tua);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #0d4013; /* Warna hover scrollbar lebih gelap */
+}
+
+/* --- PERBAIKAN FORM MODAL (VERSI TANPA IKON) --- */
+#modal-form .form-group {
+    margin-bottom: 20px;
+}
+
+#modal-form .form-group label {
+    display: block;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+#modal-form input,
+#modal-form select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    background-color: #f9f9f9;
+}
+
+#modal-form input:focus,
+#modal-form select:focus {
+    outline: none;
+    border-color: var(--hijau-tua);
+    box-shadow: 0 0 0 3px rgba(27, 94, 32, 0.2); /* Bayangan fokus menyesuaikan warna hijau baru */
+    background-color: #fff;
+}
+
+/* Layout 2 kolom untuk form yang lebih pendek */
+#modal-form .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+#modal-form .form-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+/* --- PERBAIKAN TOMBOL SIMPAN --- */
+#modal-form button[type="submit"] {
+    background-color: var(--hijau-tua);
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 15px;
+    transition: all 0.2s ease;
+    
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    visibility: visible !important;
+}
+
+#modal-form button[type="submit"]:hover {
+    background-color: #0d4013; /* Warna hover tombol lebih gelap */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+#modal-form button[type="button"] {
+    background-color: #e0e0e0;
+    color: #333;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 15px;
+    transition: background-color 0.2s;
+}
+
+#modal-form button[type="button"]:hover {
+    background-color: #bdbdbd;
+}
+
+/* --- Toast Notification --- */
+#toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--hijau-tua); /* Toast menggunakan hijau utama */
+    color: white;
+    padding: 16px 24px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    display: flex;
+    align-items: center;
+    transform: translateX(400px);
+    transition: transform 0.3s ease-in-out;
+    z-index: 1000;
+}
+
+#toast.show {
+    transform: translateX(0);
+}
+
+#toast i {
+    margin-right: 12px;
+    font-size: 20px;
+}
+
+/* --- Gaya Tambahan untuk Halaman Laporan --- */
+.laporan-card {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.laporan-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+
+#laporan-distribusi > div {
+    background-color: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 16px;
+    text-align: center;
+}
+
+#laporan-distribusi .dist-judul {
+    font-size: 14px;
+    color: #6b7280;
+    margin-bottom: 8px;
+}
+
+#laporan-distribusi .dist-nilai {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--hijau-tua);
+}
+
+#laporan-distribusi .dist-satuan {
+    font-size: 14px;
+    color: #9ca3af;
+}
+
+
+/* --- Gaya Tambahan untuk Tombol Hapus --- */
+.btn-delete {
+    background-color: #ef4444;
+    color: white;
+    border: none;
+    padding: 8px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn-delete:hover {
+    background-color: #dc2626;
+    transform: scale(1.1);
+}
+
+/* Print Styles */
+@media print {
+    body {
+        font-size: 12pt;
+        background-color: #fff; /* Latar belakang putih saat cetak untuk menghemat tinta */
+    }
+    .no-print {
+        display: none !important;
+    }
+    aside, header, button, #modal-overlay {
+        display: none !important;
+    }
+    main {
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    .page {
+        display: block !important;
+        padding: 1rem !important; /* Padding lebih kecil saat cetak */
+    }
+    .bg-white {
+        box-shadow: none !important;
+        border: 1px solid #ccc !important;
+    }
+    .laporan-card {
+        page-break-inside: avoid;
+    }
+    .btn-delete {
+        display: none !important;
+    }
+}

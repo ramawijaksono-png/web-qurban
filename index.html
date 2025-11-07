@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Manajemen Qurban - Pondok Pesantren</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font untuk Ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Chart.js untuk Grafik -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body class="font-['Poppins'] bg-gray-50">
+
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <aside id="sidebar" class="w-64 bg-gradient-to-b from-green-800 to-green-900 text-white flex-shrink-0 transition-transform duration-300 ease-in-out fixed md:relative h-full z-30 -translate-x-full md:translate-x-0">
+            <div class="p-4">
+                <div class="flex items-center mb-8">
+                    <img src="image/gp1.jpg"Logo Pondok" class="h-12 w-12 rounded-full mr-3">
+                    <div>
+                        <h2 class="text-xl font-bold">Manajemen Qurban</h2>
+                        <p class="text-xs text-green-200">Pondok Pesantren</p>
+                    </div>
+                </div>
+                <nav>
+                    <ul class="space-y-2">
+                        <li><a href="#" data-target="dashboard-page" class="nav-link flex items-center p-3 rounded-lg hover:bg-green-700 transition-colors"><i class="fas fa-home w-5 mr-3"></i> Dashboard</a></li>
+                        <li><a href="#" data-target="peserta-page" class="nav-link flex items-center p-3 rounded-lg hover:bg-green-700 transition-colors"><i class="fas fa-users w-5 mr-3"></i> Peserta</a></li>
+                        <li><a href="#" data-target="hewan-page" class="nav-link flex items-center p-3 rounded-lg hover:bg-green-700 transition-colors"><i class="fas fa-cow w-5 mr-3"></i> Daftar Hewan</a></li>
+                        <li><a href="#" data-target="distribusi-page" class="nav-link flex items-center p-3 rounded-lg hover:bg-green-700 transition-colors"><i class="fas fa-chart-pie w-5 mr-3"></i> Distribusi Daging</a></li>
+                        <li><a href="#" data-target="laporan-page" class="nav-link flex items-center p-3 rounded-lg hover:bg-green-700 transition-colors"><i class="fas fa-file-alt w-5 mr-3"></i> Laporan</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="absolute bottom-0 w-full p-4 text-xs text-green-200 border-t border-green-700">
+                <p><i class="fas fa-map-marker-alt mr-2"></i>Jl.abadi,kecamatan nglegok</p>
+                <p>Kabupaten Blitar, Provinsi jawa timur</p>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 overflow-y-auto">
+            <!-- Top Bar -->
+            <header class="bg-white shadow-sm border-b border-green-200 p-4 flex justify-between items-center md:hidden">
+                <button id="sidebar-toggle" class="text-green-800 focus:outline-none">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+                <h1 class="text-lg font-semibold text-green-800">Manajemen Qurban</h1>
+                <div></div>
+            </header>
+
+            <!-- Page Content -->
+            <div class="p-4 md:p-8">
+                <!-- Dashboard Page -->
+                <section id="dashboard-page" class="page">
+                    <div class="mb-6">
+                        <h1 class="text-3xl font-bold text-green-800">Dashboard</h1>
+                        <p class="text-gray-600">Selamat datang di Sistem Manajemen Qurban Pondok Pesantren.</p>
+                    </div>
+
+                    <!-- Sambutan -->
+                    <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-green-700 mb-6">
+                        <h2 class="text-xl font-semibold text-green-800 mb-3"><i class="fas fa-mosque mr-2"></i>Sambutan dari Panitia</h2>
+                        <p class="text-gray-700 leading-relaxed">
+                            Assalamu'alaikum Warahmatullahi Wabarakatuh. Segala puji bagi Allah, Rabb semesta alam. Shalawat serta salam senantiasa tercurah kepada junjungan kita, Nabi Muhammad SAW. Selamat datang di portal manajemen Qurban Pondok Pesantren. Semoga sistem ini mempermudah kita dalam menjalankan ibadah qurban dengan tertib, transparan, dan maksimal, sehingga manfaatnya dapat dirasakan oleh seluruh pihak. Terima kasih atas kepercayaan dan partisipasi Bapak/Ibu sekalian. Wassalamu'alaikum Warahmatullahi Wabarakatuh.
+                        </p>
+                        <p class="mt-3 font-semibold text-gray-800">- Panitia Qurban Pondok Pesantren -</p>
+                    </div>
+
+                    <!-- Galeri Foto -->
+                    <div class="bg-white p-6 rounded-lg shadow-md mb-6">
+                        <h2 class="text-xl font-semibold text-green-800 mb-4"><i class="fas fa-images mr-2"></i>Dokumentasi Kegiatan</h2>
+                        <div class="relative">
+                            <div class="slider-container overflow-hidden rounded-lg">
+                                <img id="slider-image" src="image/dokumentasi.jpg" alt="Kegiatan Qurban" class="w-full h-64 object-cover">
+                            </div>
+                            <button id="prev-btn" class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-70 text-green-800 p-2 rounded-full hover:bg-opacity-100"><i class="fas fa-chevron-left"></i></button>
+                            <button id="next-btn" class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-70 text-green-800 p-2 rounded-full hover:bg-opacity-100"><i class="fas fa-chevron-right"></i></button>
+                        </div>
+                    </div>
+                    
+                    <!-- Hadist -->
+                    <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-gold mb-6">
+                        <h2 class="text-xl font-semibold text-green-800 mb-3"><i class="fas fa-book-open mr-2 text-gold"></i>Keutamaan Berqurban</h2>
+                        <blockquote class="border-l-4 border-green-300 pl-4 italic text-gray-700">
+                            <p class="mb-2">“Ibnu ‘Abbas radhiyallahu ‘anhuma berkata, Rasulullah ﷺ bersabda: ‘Tidak ada amalan yang dilakukan oleh manusia pada hari Nahr (Idul Adha) yang lebih dicintai oleh Allah daripada mengalirkan darah (menyembelih hewan qurban). Sesungguhnya hewan qurban itu akan datang pada hari kiamat dengan tanduknya, kukunya, dan bulu-bulunya. Dan sesungguhnya sebelum darah qurban itu menyentuh tanah, ia (pahalanya) telah diterima di sisi Allah. Maka berbahagialah kalian dengan semua hal tersebut.’”</p>
+                            <footer class="text-sm text-gray-600">(HR. Tirmidzi, Ibnu Majah, dan Hakim; dinilai shahih oleh Hakim)</footer>
+                        </blockquote>
+                    </div>
+
+                    <!-- --- PEMBUAT WEB --- -->
+                    <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-gold">
+                        <h2 class="text-xl font-semibold text-green-800 mb-3"><i class="fas fa-code mr-2 text-gold"></i>Dikembangkan oleh</h2>
+                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
+                            <div>
+                                <p class="font-semibold text-gray-800">Siswa smkn 1 nglegok</p>
+                                <p class="text-sm text-gray-600">Dalam rangka tugas pembuatan web developer.</p>
+                            </div>
+                            <div class="text-right mt-4 md:mt-0">
+                                <a href="file:///D:/rama%20portofolio/porto/index.html" target="_blank" class="text-green-700 hover:text-green-900 font-semibold transition-colors">
+                                    <i class="fas fa-user-circle mr-2"></i>kelompok 5
+                                </a>
+                                <p class="text-sm text-gray-600">Web Developer</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </section>
+
+                <!-- Peserta Page -->
+                <section id="peserta-page" class="page hidden">
+                    <div class="mb-6">
+                        <h1 class="text-3xl font-bold text-green-800">Data Peserta</h1>
+                    </div>
+
+                    <!-- Tabel Panitia -->
+                    <div class="bg-white p-6 rounded-lg shadow-md mb-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <h2 class="text-xl font-semibold text-green-800"><i class="fas fa-user-tie mr-2"></i>Panitia</h2>
+                            <button class="tambah-btn bg-green-700 text-white px-4 py-2 rounded hover:bg-green-800 transition-colors" data-type="panitia">
+                                <i class="fas fa-plus mr-2"></i>Tambah Panitia
+                            </button>
+                        </div>
+                        <input type="text" id="search-panitia" placeholder="Cari nama atau jabatan..." class="w-full p-2 border border-gray-300 rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-green-500">
+                        <div class="overflow-x-auto">
+                            <table class="w-full table-auto">
+                                <thead class="bg-green-100">
+                                    <tr>
+                                        <th class="p-3 text-left cursor-pointer hover:bg-green-200" data-sort="nama">Nama <i class="fas fa-sort text-xs"></i></th>
+                                        <th class="p-3 text-left cursor-pointer hover:bg-green-200" data-sort="jabatan">Jabatan <i class="fas fa-sort text-xs"></i></th>
+                                        <th class="p-3 text-left">Kontak</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="panitia-table-body">
+                                    <!-- Data akan diisi oleh JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Tabel Shohibul Qurban -->
+                    <div class="bg-white p-6 rounded-lg shadow-md mb-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <h2 class="text-xl font-semibold text-green-800"><i class="fas fa-hand-holding-usd mr-2"></i>Shohibul Qurban</h2>
+                            <button class="tambah-btn bg-green-700 text-white px-4 py-2 rounded hover:bg-green-800 transition-colors" data-type="shohibul">
+                                <i class="fas fa-plus mr-2"></i>Tambah Shohibul
+                            </button>
+                        </div>
+                        <input type="text" id="search-shohibul" placeholder="Cari nama atau jenis hewan..." class="w-full p-2 border border-gray-300 rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-green-500">
+                        <div class="overflow-x-auto">
+                            <table class="w-full table-auto">
+                                <thead class="bg-green-100">
+                                    <tr>
+                                        <th class="p-3 text-left cursor-pointer hover:bg-green-200" data-sort="nama">Nama <i class="fas fa-sort text-xs"></i></th>
+                                        <th class="p-3 text-left">Jenis Hewan</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="shohibul-table-body">
+                                    <!-- Data akan diisi oleh JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Tabel Mustahiq -->
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <div class="flex justify-between items-center mb-4">
+                            <h2 class="text-xl font-semibold text-green-800"><i class="fas fa-users mr-2"></i>Mustahiq (Penerima)</h2>
+                            <button class="tambah-btn bg-green-700 text-white px-4 py-2 rounded hover:bg-green-800 transition-colors" data-type="mustahiq">
+                                <i class="fas fa-plus mr-2"></i>Tambah Mustahiq
+                            </button>
+                        </div>
+                        <input type="text" id="search-mustahiq" placeholder="Cari nama atau alamat..." class="w-full p-2 border border-gray-300 rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-green-500">
+                        <div class="overflow-x-auto">
+                            <table class="w-full table-auto">
+                                <thead class="bg-green-100">
+                                    <tr>
+                                        <th class="p-3 text-left cursor-pointer hover:bg-green-200" data-sort="nama">Nama <i class="fas fa-sort text-xs"></i></th>
+                                        <th class="p-3 text-left">Alamat</th>
+                                        <th class="p-3 text-left">Kategori</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="mustahiq-table-body">
+                                    <!-- Data akan diisi oleh JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Daftar Hewan Page -->
+                <section id="hewan-page" class="page hidden">
+                    <div class="mb-6">
+                        <h1 class="text-3xl font-bold text-green-800">Daftar Hewan Qurban</h1>
+                    </div>
+                    
+                    <!-- Rekap Total -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                        <div class="bg-white p-4 rounded-lg shadow-md border-l-4 border-green-700">
+                            <h3 class="font-semibold text-gray-600">Total Sapi</h3>
+                            <p class="text-3xl font-bold text-green-800" id="total-sapi">0</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg shadow-md border-l-4 border-green-700">
+                            <h3 class="font-semibold text-gray-600">Total Kambing</h3>
+                            <p class="text-3xl font-bold text-green-800" id="total-kambing">0</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg shadow-md border-l-4 border-green-700">
+                            <h3 class="font-semibold text-gray-600">Total Domba</h3>
+                            <p class="text-3xl font-bold text-green-800" id="total-domba">0</p>
+                        </div>
+                    </div>
+
+                    <!-- Tabel Detail Hewan -->
+                    <div class="bg-white p-6 rounded-lg shadow-md mb-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <h2 class="text-xl font-semibold text-green-800"><i class="fas fa-list mr-2"></i>Data Detail Hewan</h2>
+                            <button class="tambah-btn bg-green-700 text-white px-4 py-2 rounded hover:bg-green-800 transition-colors" data-type="hewan">
+                                <i class="fas fa-plus mr-2"></i>Tambah Hewan
+                            </button>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full table-auto">
+                                <thead class="bg-green-100">
+                                    <tr>
+                                        <th class="p-3 text-left">ID</th>
+                                        <th class="p-3 text-left">Jenis Hewan</th>
+                                        <th class="p-3 text-left">Berat Awal (kg)</th>
+                                        <th class="p-3 text-left">Shohibul</th>
+                                        <th class="p-3 text-left">Berat Daging Bersih (kg)</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="hewan-table-body">
+                                    <!-- Data akan diisi oleh JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Distribusi Daging Page -->
+                <section id="distribusi-page" class="page hidden">
+                    <div class="mb-6">
+                        <h1 class="text-3xl font-bold text-green-800">Distribusi Daging</h1>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <!-- Input Kalkulasi -->
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <h2 class="text-xl font-semibold text-green-800 mb-4"><i class="fas fa-calculator mr-2"></i>Kalkulasi Distribusi</h2>
+                            <div class="mb-4">
+                                <label class="block text-gray-700 text-sm font-bold mb-2">Total Berat Daging Bersih (kg)</label>
+                                <input type="number" id="total-daging-input" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500" value="500">
+                            </div>
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-between">
+                                    <label for="persen-shohibul" class="text-gray-700">Shohibul (%)</label>
+                                    <input type="number" id="persen-shohibul" class="w-24 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500" value="30">
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <label for="persen-panitia" class="text-gray-700">Panitia (%)</label>
+                                    <input type="number" id="persen-panitia" class="w-24 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500" value="5">
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <label for="persen-jamaah" class="text-gray-700">Jamaah Sekitar (%)</label>
+                                    <input type="number" id="persen-jamaah" class="w-24 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500" value="25">
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <label for="persen-mustahiq" class="text-gray-700">Mustahiq (%)</label>
+                                    <input type="number" id="persen-mustahiq" class="w-24 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500" value="40">
+                                </div>
+                            </div>
+                            <button id="hitung-distribusi" class="mt-4 w-full bg-green-700 text-white font-bold py-2 px-4 rounded hover:bg-green-800 transition-colors">Hitung Distribusi</button>
+                        </div>
+
+                        <!-- Grafik -->
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <h2 class="text-xl font-semibold text-green-800 mb-4"><i class="fas fa-chart-pie mr-2"></i>Visualisasi Distribusi</h2>
+                            <canvas id="distribusi-chart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Tabel Hasil Distribusi -->
+                    <div class="bg-white p-6 rounded-lg shadow-md mt-6">
+                        <h2 class="text-xl font-semibold text-green-800 mb-4"><i class="fas fa-table mr-2"></i>Hasil Pembagian per Kategori</h2>
+                        <div class="overflow-x-auto">
+                            <table class="w-full table-auto">
+                                <thead class="bg-green-100">
+                                    <tr>
+                                        <th class="p-3 text-left">Kategori Penerima</th>
+                                        <th class="p-3 text-left">Persentase (%)</th>
+                                        <th class="p-3 text-left">Jumlah (kg)</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="distribusi-table-body">
+                                    <!-- Data akan diisi oleh JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+          <!-- Laporan Page -->
+<section id="laporan-page" class="page hidden">
+    <div class="mb-6">
+        <h1 class="text-3xl font-bold text-green-800">Laporan Qurban</h1>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- Card Ringkasan Utama -->
+        <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-green-700 laporan-card">
+            <h2 class="text-xl font-semibold text-green-800 mb-4"><i class="fas fa-clipboard-list mr-2"></i>Ringkasan Utama</h2>
+            <div class="space-y-3">
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-600">Total Hewan Qurban</span>
+                    <span class="font-bold text-green-800 text-lg" id="lap-total-hewan-summary">0</span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-600">Total Berat Daging Bersih</span>
+                    <span class="font-bold text-green-800 text-lg" id="lap-total-daging">0 kg</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card Jumlah Peserta -->
+        <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-gold laporan-card">
+            <h2 class="text-xl font-semibold text-green-800 mb-4"><i class="fas fa-users mr-2 text-gold"></i>Jumlah Peserta</h2>
+            <div class="space-y-3">
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-600">Shohibul Qurban</span>
+                    <span class="font-bold text-gray-800 text-lg" id="lap-shohibul">0</span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-600">Mustahiq (KK)</span>
+                    <span class="font-bold text-gray-800 text-lg" id="lap-mustahiq">0</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="bg-white p-6 rounded-lg shadow-md mt-6 laporan-card">
+        <h2 class="text-xl font-semibold text-green-800 mb-4"><i class="fas fa-list-alt mr-2"></i>Rekap Jumlah Hewan Per Jenis</h2>
+        <div class="grid grid-cols-3 gap-4 text-center" id="laporan-rekap-hewan">
+            <!-- Data akan diisi oleh JS -->
+        </div>
+    </div>
+
+    <!-- Card Distribusi Daging -->
+    <div class="bg-white p-6 rounded-lg shadow-md mt-6 laporan-card">
+        <h2 class="text-xl font-semibold text-green-800 mb-4"><i class="fas fa-chart-pie mr-2"></i>Rekap Distribusi Daging</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="laporan-distribusi">
+            <!-- Data akan diisi oleh JS -->
+        </div>
+    </div>
+</section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal untuk Tambah Data -->
+    <div id="modal-overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div id="modal-box" class="bg-white p-6 rounded-lg shadow-xl w-[500px] max-w-full mx-4 relative">
+            <button id="modal-close" class="absolute top-3 right-3 text-gray-500 hover:text-gray-800">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+            <h3 id="modal-title" class="text-xl font-semibold text-green-800 mb-4">Tambah Data Baru</h3>
+            <form id="modal-form">
+                <!-- Isi form akan digenerate oleh JavaScript -->
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toast-message">Data berhasil ditambahkan!</span>
+    </div>
+
+    <!-- Custom JS -->
+    <script src="script.js"></script>
+</body>
+</html>
